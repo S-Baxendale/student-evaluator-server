@@ -1,13 +1,39 @@
-import { JsonController, Get, Param, Delete, Patch, Body, NotFoundError } from 'routing-controllers'
+import { JsonController, Get, Post, Param, Delete, Patch, Body, NotFoundError } from 'routing-controllers'
+import * as request from 'superagent'
 import Student from './entity'
+import Batch from '../batches/entity'
 
+interface StudentEntity {
+  id: number
+  firstName: string
+  lastName: string
+  photo: string
+  batch_id: number
+}
 
 @JsonController()
 export default class StudentController {
 
+  //Create New Student:
+  @Post('/batches/:id([0-9]+)/students')
+  async createStudent(
+    @Param('id') id: number,
+    @Body() student: Student
+  ) {
+    const batch = await Batch.findOneById(id)
+
+    const entity = await Student.create({
+      batch,
+      ...student
+    }).save()
+
+    return entity
+
+  }
+
   //Get All Students:
   @Get('/students')
-    getStudents() {
+  async getStudents() {
       return Student.find()
     }
 
@@ -40,5 +66,6 @@ export default class StudentController {
       message: "Student deleted sucessfully"
     }
   }
+
 
 }

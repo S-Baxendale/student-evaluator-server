@@ -1,5 +1,5 @@
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm'
-import { IsString, IsDate } from 'class-validator'
+import { IsString, IsDateString } from 'class-validator'
 
 import Teacher from '../teachers/entity'
 import Student from '../students/entity'
@@ -10,7 +10,7 @@ export default class Evaluation extends BaseEntity {
   @PrimaryGeneratedColumn()
   id?: number
 
-  @IsDate()
+  @IsDateString()
   @Column()
   date: Date
   // Create Date Column in TypeORM?
