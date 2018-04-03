@@ -1,9 +1,13 @@
 import 'reflect-metadata'
-import {createKoaServer} from "routing-controllers"
+import {createKoaServer, Action, BadRequestError} from "routing-controllers"
 import setupDb from './db'
+
 import BatchController from './batches/controller'
 import StudentController from './students/controller'
 import TeacherController from './teachers/controller'
+import Teacher from './teachers/entity'
+
+import { verify } from './jwt'
 
 const port = process.env.PORT || 4008
 
@@ -13,7 +17,35 @@ const app = createKoaServer({
     BatchController,
     StudentController,
     TeacherController
-  ]
+  ],
+  authorizationChecker: (action: Action) => {
+    const header: string = action.request.headers.authorization
+    if (header && header.startsWith('Bearer ')) {
+      const [ , token ] = header.split(' ')
+
+      try {
+        return !!(token && verify(token))
+      }
+      catch (e) {
+        throw new BadRequestError(e)
+      }
+    }
+
+    return false
+  },
+  currentUserChecker: async (action: Action) => {
+    const header: string = action.request.headers.authorization
+    if (header && header.startsWith('Bearer ')) {
+      const [ , token ] = header.split(' ')
+
+      if (token) {
+        const {id} = verify(token)
+        return Teacher.findOneById(id)
+      }
+    }
+    return undefined
+  }
+
 })
 
 setupDb()
