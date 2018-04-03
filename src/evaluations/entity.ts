@@ -10,9 +10,9 @@ export default class Evaluation extends BaseEntity {
   @PrimaryGeneratedColumn()
   id?: number
 
-  @IsDateString()
+  //@IsDateString()
   @Column()
-  date: Date
+  date: string
   // Create Date Column in TypeORM?
   // Set Default date?
   // @IsDateString()?
