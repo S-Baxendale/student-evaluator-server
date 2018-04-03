@@ -23,6 +23,9 @@ export default class EvaluationController {
     }).save()
 
     return entity
+
+    // Need to Limit to one per day.
+
   }
 
   //Edit Evaluation:
@@ -36,4 +39,15 @@ export default class EvaluationController {
 
     return Evaluation.merge(evaluation, update).save()
   }
+
+  //Get Evaluations for specific Student:
+  @Get('/evaluations/students/:id([0-9]+)')
+  async getEvaluations(
+    @Param('id') id: number
+  ) {
+    const student = await Student.findOneById(id)
+
+    return
+  }
+
 }
