@@ -1,5 +1,6 @@
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm'
 import { IsString, IsDate } from 'class-validator'
+
 import Teacher from '../teachers/entity'
 import Student from '../students/entity'
 
@@ -17,6 +18,7 @@ export default class Evaluation extends BaseEntity {
   @IsString()
   @Column('text')
   color: string
+  // Color code?
 
   @IsString()
   @Column('text')

@@ -22,10 +22,10 @@ export default class Student extends BaseEntity {
   @Column('text')
   photo: string
 
-  @OneToMany(_ => Evaluation, evaluation => evaluation.student)
-  evaluation: Evaluation[]
-
   @ManyToOne(_ => Batch, batch => batch.students)
   batch: Batch
+
+  @OneToMany(_ => Evaluation, evaluation => evaluation.student)
+  evaluations: Evaluation[]
 
 }

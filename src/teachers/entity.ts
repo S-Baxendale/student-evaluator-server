@@ -2,7 +2,7 @@ import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, OneToMany } from 't
 import { Exclude } from 'class-transformer';
 import { MinLength, IsString, IsEmail } from 'class-validator';
 import * as bcrypt from 'bcrypt'
-//Import Evaluations:
+import Evaluation from '../evaluations/entity'
 
 @Entity()
 export default class Teacher extends BaseEntity {
@@ -30,6 +30,6 @@ export default class Teacher extends BaseEntity {
   }
 
   @OneToMany(_ => Evaluation, evaluation => evaluation.teacher)
-  evaluation: Evaluation[]
-  
+  evaluations: Evaluation[]
+
 }
