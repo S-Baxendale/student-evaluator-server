@@ -13,6 +13,7 @@ export default class Evaluation extends BaseEntity {
   @IsDate()
   @Column()
   date: Date
+  // Create Date Column in TypeORM?
   // Set Default date?
 
   @IsString()

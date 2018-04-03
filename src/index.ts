@@ -1,13 +1,14 @@
 import 'reflect-metadata'
 import {createKoaServer} from "routing-controllers"
 import setupDb from './db'
+import BatchController from './batches/controller'
 
 const port = process.env.PORT || 4008
 
 const app = createKoaServer({
   cors: true,
   controllers: [
-    //..
+    BatchController
   ]
 })
 

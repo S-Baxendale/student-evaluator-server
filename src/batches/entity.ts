@@ -10,14 +10,14 @@ export default class Batch extends BaseEntity {
   id?: number
 
   @IsDate()
-  @Column()
+  @Column({nullable: false})
   startDate: Date
 
   @IsDate()
-  @Column()
+  @Column({nullable: false})
   endDate: Date
 
-  @OneToMany(_ => Student, student => student.batch)
+  @OneToMany(_ => Student, student => student.batch, {eager:true})
   students: Student[]
 
 }
