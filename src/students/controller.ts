@@ -1,4 +1,4 @@
-import { JsonController, Get, Post, Param, Delete, Patch, Body, NotFoundError } from 'routing-controllers'
+import { JsonController, Get, Post, Param, Delete, Put, Body, NotFoundError } from 'routing-controllers'
 //import * as request from 'superagent'
 import Student from './entity'
 import Batch from '../batches/entity'
@@ -38,7 +38,7 @@ export default class StudentController {
     }
 
   //Edit Student by ID:
-  @Patch('/students/:id([0-9]+)')
+  @Put('/students/:id([0-9]+)')
   async editStudent(
     @Param('id') id: number,
     @Body() update: Partial<Student>

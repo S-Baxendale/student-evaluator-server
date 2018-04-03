@@ -1,4 +1,4 @@
-import { JsonController, CurrentUser, Get, Post, Param, Delete, Patch, Body, NotFoundError } from 'routing-controllers'
+import { JsonController, CurrentUser, Get, Post, Param, Delete, Put, Body, NotFoundError } from 'routing-controllers'
 
 import Student from '../students/entity'
 import Teacher from '../teachers/entity'
@@ -16,17 +16,24 @@ export default class EvaluationController {
   ) {
     const student = await Student.findOneById(id)
 
-
     const entity = await Evaluation.create({
       student,
       teacher,
       ...evaluation
     }).save()
-    console.log(teacher)
 
     return entity
-
   }
 
+  //Edit Evaluation:
+  @Put('/evaluations/:id([0-9]+)')
+  async updateEvaluation(
+    @Param('id') id: number,
+    @Body() update: Partial<Evaluation>
+  ) {
+    const evaluation = await Evaluation.findOneById(id)
+    if(!evaluation) throw new NotFoundError('Cannot find evaluation')
 
+    return Evaluation.merge(evaluation, update).save()
+  }
 }
