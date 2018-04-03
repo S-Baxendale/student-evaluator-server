@@ -1,15 +1,7 @@
 import { JsonController, Get, Post, Param, Delete, Patch, Body, NotFoundError } from 'routing-controllers'
-import * as request from 'superagent'
+//import * as request from 'superagent'
 import Student from './entity'
 import Batch from '../batches/entity'
-
-interface StudentEntity {
-  id: number
-  firstName: string
-  lastName: string
-  photo: string
-  batch_id: number
-}
 
 @JsonController()
 export default class StudentController {
