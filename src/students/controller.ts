@@ -34,7 +34,7 @@ export default class StudentController {
     getStudent(
       @Param('id') id: number
     ) {
-      return Student.findOneById(id)
+      return Student.findOneById(id, {relations: ["batch"]})
     }
 
   //Edit Student by ID:

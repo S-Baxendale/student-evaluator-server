@@ -12,7 +12,7 @@ export default class Evaluation extends BaseEntity {
 
   //@IsDateString()
   @Column()
-  date: string
+  date: Date
   // Create Date Column in TypeORM?
   // Set Default date?
   // @IsDateString()?
@@ -29,7 +29,7 @@ export default class Evaluation extends BaseEntity {
   @ManyToOne(_ => Teacher, teacher => teacher.evaluations)
   teacher: Teacher
 
-  @ManyToOne(_ => Student, student => student.evaluations)
+  @ManyToOne(_ => Student, student => student.evaluations, {onDelete: "CASCADE"})
   student: Student
 
 }
