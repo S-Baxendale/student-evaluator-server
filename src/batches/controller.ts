@@ -5,7 +5,7 @@ import Batch from './entity'
 @JsonController()
 export default class BatchController {
 
-  //@Authorized()
+  @Authorized()
   @Get('/batches')
     getBatches() {
       return Batch.find()
