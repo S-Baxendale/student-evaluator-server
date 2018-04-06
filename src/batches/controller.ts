@@ -11,7 +11,7 @@ export default class BatchController {
       return Batch.find()
     }
 
-  //@Authorized()
+  @Authorized()
   @Get('/batches/:id([0-9]+)')
     getBatch(
       @Param('id') id: number
@@ -19,7 +19,7 @@ export default class BatchController {
       return Batch.findOneById(id)
     }
 
-  //@Authorized()
+  @Authorized()
   @Post('/batches')
     async createBatch(
       @Body() batch: Batch
