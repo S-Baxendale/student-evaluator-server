@@ -1,4 +1,4 @@
-import { JsonController, CurrentUser, Get, Post, Param, Delete, Put, Body, NotFoundError } from 'routing-controllers'
+import { JsonController, CurrentUser, Get, Post, Param, Delete, Put, Body, NotFoundError, Authorized } from 'routing-controllers'
 
 import Student from '../students/entity'
 import Teacher from '../teachers/entity'
@@ -8,6 +8,7 @@ import Evaluation from './entity'
 export default class EvaluationController {
 
   //Create New Evaluation:
+  @Authorized()
   @Post('/evaluations/students/:id([0-9]+)')
   async createEvaluation(
     @Param('id') id: number,
@@ -29,6 +30,7 @@ export default class EvaluationController {
   }
 
   //Edit Evaluation:
+  @Authorized()
   @Put('/evaluations/:id([0-9]+)')
   async updateEvaluation(
     @Param('id') id: number,
@@ -41,6 +43,7 @@ export default class EvaluationController {
   }
 
   //Get Evaluations for specific Student:
+  @Authorized()
   @Get('/evaluations/students/:id([0-9]+)')
   async getEvaluations(
     @Param('id') id: number
